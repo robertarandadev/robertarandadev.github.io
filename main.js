@@ -45,7 +45,7 @@
 
   // Titular con líneas que suben
   $('#heroTitle').innerHTML = (D.headline || [D.name]).map((t, i) =>
-    `<span class="line"><span class="${i === 1 ? 'grad-text' : ''}" style="--i:${i}">${esc(t)}</span></span>`).join('');
+    `<span class="line"><span class="${i === 1 ? 'grad-text' : ''}" style="--i:${i}">${esc(t)}</span></span>`).join(' ');
   $('#heroIntro').textContent = D.intro || '';
   $('#trustList').innerHTML = projects.map((p) =>
     `<a class="trust-chip" href="${esc(p.url)}" target="_blank" rel="noopener"><i></i>${esc(p.title)}</a>`).join('');
