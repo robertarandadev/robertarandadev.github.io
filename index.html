@@ -83,9 +83,26 @@
 
   <!-- Pantalla de carga -->
   <div id="loader" aria-hidden="true">
-    <div class="ld">
-      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" /></svg>
-      <span>RA</span>
+    <div class="ld-grid"></div>
+    <div class="ld-shapes">
+      <i class="ls ls-win" style="--x:-340px;--y:-150px;--r:-10deg;--d:.05s"><b></b></i>
+      <i class="ls ls-phone" style="--x:320px;--y:-170px;--r:12deg;--d:.15s"></i>
+      <i class="ls ls-gear" style="--x:-380px;--y:150px;--r:0deg;--d:.25s"><span>⚙</span></i>
+      <i class="ls ls-cube" style="--x:350px;--y:140px;--r:18deg;--d:.1s"></i>
+      <i class="ls ls-cursor" style="--x:-160px;--y:-240px;--r:-14deg;--d:.3s"></i>
+      <i class="ls ls-chart" style="--x:180px;--y:240px;--r:0deg;--d:.2s"><b></b><b></b><b></b></i>
+      <i class="ls ls-check" style="--x:-200px;--y:250px;--r:0deg;--d:.35s">✓</i>
+    </div>
+    <div class="ld-center">
+      <div class="ld-core">
+        <div class="ld-orbit o1"><span></span></div>
+        <div class="ld-orbit o2"><span></span></div>
+        <div class="ld-logo">RA</div>
+      </div>
+      <div class="ld-name" id="ldName"></div>
+      <div class="ld-role" id="ldRole">Desarrollador de Software</div>
+      <div class="ld-progress"><div class="ld-bar"><i id="ldBar"></i></div><span class="ld-pct"><span id="ldPct">0</span>%</span></div>
+      <div class="ld-status" id="ldStatus">Cargando proyectos…</div>
     </div>
   </div>
 

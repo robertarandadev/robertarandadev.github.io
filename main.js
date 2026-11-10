@@ -130,7 +130,35 @@
     try { seen = sessionStorage.getItem('ra-boot') === '1'; sessionStorage.setItem('ra-boot', '1'); } catch { /* sin storage */ }
     const finish = () => { document.body.classList.remove('loading'); done(); };
     if (REDUCE || seen) { L.remove(); finish(); return; }
-    setTimeout(() => { L.classList.add('done'); finish(); setTimeout(() => L.remove(), 700); }, 1000);
+
+    // Nombre letra por letra (el apellido con degradado azul)
+    const parts = (D.name || '').split(' ');
+    let n = 0;
+    $('#ldName').innerHTML = parts.map((w, wi) =>
+      Array.from(w).map((ch) => `<span class="${wi > 0 ? 'hl' : ''}" style="--i:${n++}">${esc(ch)}</span>`).join('')
+    ).join('<span class="sp" style="--i:0"></span>');
+    if (D.role) $('#ldRole').textContent = D.role;
+
+    // Contador 0 → 100 % con mensajes
+    const bar = $('#ldBar'), pct = $('#ldPct'), status = $('#ldStatus');
+    const msgs = [[0, 'Cargando proyectos…'], [40, 'Preparando el diseño…'], [78, 'Activando efectos 3D…'], [100, '¡Todo listo! 🚀']];
+    let shown = 0;
+    const DUR = 1900, start = performance.now();
+    (function tick(now) {
+      const p = clamp((now - start) / DUR);
+      const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      const v = Math.round(e * 100);
+      bar.style.transform = `scaleX(${e})`;
+      pct.textContent = v;
+      const m = msgs.filter(([at]) => v >= at).length - 1;
+      if (m !== shown && m >= 0) {
+        shown = m;
+        status.textContent = msgs[m][1];
+        status.classList.remove('swap'); void status.offsetWidth; status.classList.add('swap');
+      }
+      if (p < 1) requestAnimationFrame(tick);
+      else setTimeout(() => { L.classList.add('done'); finish(); setTimeout(() => L.remove(), 1000); }, 280);
+    })(start);
   }
 
   /* =======================================================
